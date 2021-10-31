@@ -1,0 +1,131 @@
+CREATE TABLE `Ward` (
+  `ward_num` int ,
+  `ward_name` varchar(32),
+  `Location` varchar(32),
+  `No_of_beds` int,
+  `telephone` char(12),
+  `Staff_no` int,
+  PRIMARY KEY (`ward_num`)
+);
+
+CREATE TABLE `Doctor` (
+  `Doc_Id` int,
+  `doc_name` varchar(32),
+  `clinic_address` varchar(32),
+  `Tel_No` char(12),
+  `Clinic_Id` int,
+  `clinic_phone` char(12),
+  PRIMARY KEY (`Doc_Id`)
+);
+
+CREATE TABLE `Clinic` (
+  `Clinic_Id` int,
+  `clinic_name` varchar(50),
+  `clinic_phone` char(12),
+  `clinic_address` varchar(32),
+  PRIMARY KEY (`Clinic_Id`)
+);
+
+CREATE TABLE `Staff` (
+  `staff_num` int,
+  `first_name` varchar(30),
+  `last_name` varchar(30),
+  `address` varchar(30),
+  `phone_num` char(12),
+  `birth_date` date,
+  `sex` varchar(10),
+  `NIN` int,
+  `position_held` varchar(30),
+  `salary` decimal(6,2),
+  `salary_scale` varchar(30),
+  `qua_type` varchar(30),
+  `qua_date` date,
+  `institution_name` varchar(30),
+  `clinic_name` varchar(50),
+  `start_date` date,
+  `finish_date` date,
+  `contract_type` varchar(30),
+  `hours` int,
+  `salary_type` varchar(15),
+  `shift_type` varchar(15),
+  PRIMARY KEY (`staff_num`),
+  FOREIGN KEY (`first_name`) REFERENCES `Clinic`(`clinic_address`)
+);
+
+CREATE TABLE `Ward Requisitions` (
+  `req_num` int,
+  `staff_name` varchar(30),
+  `ward_num` int,
+  `ward_name` varchar(30),
+  `drug_num` int,
+  `drug_name` varchar(30),
+  `description` varchar(50),
+  `dosage` varchar(50),
+  PRIMARY KEY (`req_num`),
+  FOREIGN KEY (`staff_name`) REFERENCES `Ward`(`ward_num`)
+);
+
+CREATE TABLE `Patient` (
+  `pat_num` int,
+  `name` varchar(32),
+  `address` varchar(32),
+  `phone` char(12),
+  `date_of_birth` date,
+  `sex` varchar(32),
+  `marital_status` varchar(32),
+  `admittance_date` date,
+  `patient_type` varchar(32),
+  `Kin_num` int,
+  `kin_address` varchar(32),
+  `kin_phone` char(12),
+  `Clinic_id` int,
+  `clinic_phone` char(12),
+  `clinic_address` varchar(32),
+  PRIMARY KEY (`pat_num`)
+);
+
+CREATE TABLE `medical supplies` (
+  `drug_num` int(20),
+  `Sur_supply` varchar(32),
+  `nonsur_supply` varchar(50),
+  `Pharm_supply` varchar(50),
+  `drug_name` varchar(50),
+  `description` varchar(50),
+  `dosage` varchar(50),
+  `method` varchar(50),
+  `level` int,
+  `quantity` int,
+  `cost` decimal(6,2)
+);
+
+CREATE TABLE `Supplier` (
+  `sup_num` int,
+  `sup_name` varchar(32),
+  `sup_address` string,
+  PRIMARY KEY (`sup_num`)
+);
+
+CREATE TABLE `Patient Appointment` (
+  `app_num` int,
+  `staff_num` int,
+  `pat_num` int,
+  `app_date` date,
+  `app_time` varchar(10),
+  `room` int,
+  `ward_num` int,
+  PRIMARY KEY (`app_num`)
+);
+
+CREATE TABLE `Medication` (
+  `drug_num` int,
+  `drug_name` varchar(32),
+  `description` varchar(50),
+  `units` int,
+  `metod` varchar(20),
+  `pat_num` int,
+  `start_date` date,
+  `finish_date` date,
+  PRIMARY KEY (`drug_num`),
+  FOREIGN KEY (`drug_name`) REFERENCES `Patient`(`kin_phone`)
+);
+
