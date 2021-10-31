@@ -1,3 +1,8 @@
+-- Eyene Edeh
+-- Markham Dmitri 
+-- Sotov Viacheslav
+
+
 CREATE TABLE `Ward` (
   `ward_num` int ,
   `ward_name` varchar(32),
