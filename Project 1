@@ -23,6 +23,38 @@ CREATE TABLE `Doctor` (
   PRIMARY KEY (`Doc_Id`)
 );
 
+CREATE TABLE `Patient` (
+  `pat_num` int,
+  `name` varchar(32),
+  `address` varchar(32),
+  `phone` char(12),
+  `date_of_birth` date,
+  `sex` varchar(32),
+  `marital_status` varchar(32),
+  `admittance_date` date,
+  `patient_type` varchar(32),
+  `Kin_num` int,
+  `kin_address` varchar(32),
+  `kin_phone` char(12),
+  `Clinic_id` int,
+  `clinic_phone` char(12),
+  `clinic_address` varchar(32),
+  PRIMARY KEY (`pat_num`)
+);
+
+CREATE TABLE `Medication` (
+  `drug_num` int,
+  `drug_name` varchar(32),
+  `description` varchar(50),
+  `units` int,
+  `metod` varchar(20),
+  `pat_num` int,
+  `start_date` date,
+  `finish_date` date,
+  PRIMARY KEY (`drug_num`),
+  FOREIGN KEY (`drug_name`) REFERENCES `Patient`(`kin_phone`)
+);
+
 CREATE TABLE `Clinic` (
   `Clinic_Id` int,
   `clinic_name` varchar(50),
@@ -70,27 +102,8 @@ CREATE TABLE `Ward Requisitions` (
   FOREIGN KEY (`staff_name`) REFERENCES `Ward`(`ward_num`)
 );
 
-CREATE TABLE `Patient` (
-  `pat_num` int,
-  `name` varchar(32),
-  `address` varchar(32),
-  `phone` char(12),
-  `date_of_birth` date,
-  `sex` varchar(32),
-  `marital_status` varchar(32),
-  `admittance_date` date,
-  `patient_type` varchar(32),
-  `Kin_num` int,
-  `kin_address` varchar(32),
-  `kin_phone` char(12),
-  `Clinic_id` int,
-  `clinic_phone` char(12),
-  `clinic_address` varchar(32),
-  PRIMARY KEY (`pat_num`)
-);
-
 CREATE TABLE `medical supplies` (
-  `drug_num` int(20),
+  `Sur_Id` int,
   `Sur_supply` varchar(32),
   `nonsur_supply` varchar(50),
   `Pharm_supply` varchar(50),
@@ -100,7 +113,9 @@ CREATE TABLE `medical supplies` (
   `method` varchar(50),
   `level` int,
   `quantity` int,
-  `cost` decimal(6,2)
+  `cost` decimal(6,2),
+  `drug_num` int,
+  PRIMARY KEY (`Sur_Id`)
 );
 
 CREATE TABLE `Supplier` (
@@ -120,17 +135,3 @@ CREATE TABLE `Patient Appointment` (
   `ward_num` int,
   PRIMARY KEY (`app_num`)
 );
-
-CREATE TABLE `Medication` (
-  `drug_num` int,
-  `drug_name` varchar(32),
-  `description` varchar(50),
-  `units` int,
-  `metod` varchar(20),
-  `pat_num` int,
-  `start_date` date,
-  `finish_date` date,
-  PRIMARY KEY (`drug_num`),
-  FOREIGN KEY (`drug_name`) REFERENCES `Patient`(`kin_phone`)
-);
-
